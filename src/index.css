@@ -18,6 +18,13 @@
 
 :root {
   font-family: var(--font-sans);
+  --cards-sticky-top: 6.75rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --cards-sticky-top: 4.75rem;
+  }
 }
 
 .font-script {

@@ -1,12 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Sparkles, UserCheck, Search, Check, ShieldCheck, 
-  Camera, ArrowRight, X, Calendar, MapPin, Users, HelpCircle 
+import {
+  Sparkles, UserCheck, Search, Check, ShieldCheck,
+  Camera, ArrowRight, X, Calendar, MapPin, Users, HelpCircle
 } from 'lucide-react';
 import { Delegate } from '../types/agenda';
 import { soundEngine } from '../utils/audio';
 import { triggerSummitConfetti } from '../utils/confetti';
 import { BadgePhotoBooth } from './BadgePhotoBooth';
+import { BorderBeam } from './magicui/BorderBeam';
 
 interface WelcomeScreenProps {
   isOpen: boolean;
@@ -45,8 +46,8 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const searchResults = useMemo(() => {
     if (!search.trim()) return delegates.slice(0, 6);
     const q = search.toLowerCase().trim();
-    return delegates.filter(d => 
-      d.name.toLowerCase().includes(q) || 
+    return delegates.filter(d =>
+      d.name.toLowerCase().includes(q) ||
       d.association.toLowerCase().includes(q)
     ).slice(0, 8);
   }, [search, delegates]);
@@ -59,7 +60,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const handleQuickConfirm = (del: Delegate) => {
     const now = new Date();
     const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    
+
     onConfirmCheckIn(del.id, timeStr);
     setSelectedDelegate(del);
     soundEngine.playStartedAlert();
@@ -73,13 +74,20 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#140124]/90 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      
-      {/* Welcome Modal Container */}
+
+      {/* Welcome Modal Container with Border Beam */}
       <div className="relative max-w-xl w-full mx-auto my-auto rounded-3xl overflow-hidden border-2 border-purple-200/90 bg-white text-slate-900 shadow-2xl flex flex-col max-h-[94vh]">
-        
+        <BorderBeam
+          size={280}
+          duration={6}
+          colorFrom="#E01E7E"
+          colorTo="#00D5D8"
+          borderWidth={2}
+        />
+
         {/* Top Decorative Summit Banner */}
         <div className="relative p-6 sm:p-7 bg-gradient-to-br from-[#1C0235] via-[#2A054E] to-[#E01E7E] text-white overflow-hidden shrink-0">
-          
+
           {/* Subtle star elements */}
           <div className="absolute top-3 right-12 text-[#00D5D8] text-2xl font-black opacity-30 select-none">
             ★
@@ -89,14 +97,19 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="h-8 px-2.5 bg-white rounded-xl shadow-md flex items-center justify-center shrink-0 border border-white/40">
-              <img 
-                src="/ov27-logo-color-v2.png" 
-                alt="OneVoice27 Logo" 
-                className="h-5 w-auto object-contain"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                }}
+            {/* Logo capsule with Border Beam */}
+            <div className="relative overflow-hidden rounded-2xl p-1.5 px-3 bg-[#1C0235]/80 backdrop-blur-md border border-[#E01E7E]/50 shadow-md flex items-center justify-center">
+              <BorderBeam
+                size={120}
+                duration={4}
+                colorFrom="#E01E7E"
+                colorTo="#00D5D8"
+                borderWidth={2}
+              />
+              <img
+                src="/summit-logo.png"
+                alt="Digital Creator Summit"
+                className="h-7 sm:h-8 w-auto object-contain drop-shadow-md shrink-0"
               />
             </div>
 
@@ -127,7 +140,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
         {/* Content Body */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-5">
-          
+
           {/* CELEBRATION ALERT WHEN JUST CONFIRMED */}
           {justConfirmed && (
             <div className="p-3.5 rounded-2xl bg-teal-50 border-2 border-[#00B4B7] text-[#007D80] animate-in zoom-in-95 duration-200 text-center space-y-0.5 shadow-md">
@@ -144,7 +157,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           {/* ACTIVE / MY DELEGATE BADGE VIEW (IF SELECTED) */}
           {myDelegate ? (
             <div className="p-4 sm:p-5 rounded-2xl border-2 border-purple-200/90 bg-gradient-to-b from-purple-50/50 to-white shadow-md space-y-4">
-              
+
               <div className="flex items-center justify-between border-b border-purple-100 pb-3">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#007D80] flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-[#007D80]" />
@@ -162,7 +175,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
                   {/* Photo or initial */}
-                  <div 
+                  <div
                     onClick={() => setIsPhotoBoothOpen(true)}
                     className="relative cursor-pointer group shrink-0"
                     title="Tomar o cambiar foto con marco oficial"
@@ -314,9 +327,9 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
             <button
               onClick={onClose}
-              className="flex-1 min-h-[48px] px-5 py-2.5 rounded-2xl bg-[#E01E7E] hover:bg-[#C21268] active:scale-95 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#E01E7E]/30 transition-all"
+              className="flex-1 min-h-[48px] px-5 py-2.5 rounded-2xl bg-[#E01E7E] hover:bg-[#C21268] active:scale-95 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#E01E7E]/30 transition-all cursor-pointer"
             >
-              <span>Entrar al Gestor de Agenda</span>
+              <span>Siguiente · Entrar al Evento</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

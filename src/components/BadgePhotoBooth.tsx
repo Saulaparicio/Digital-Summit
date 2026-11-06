@@ -247,7 +247,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
 
     const [img, logoImg] = await Promise.all([
       loadImage(rawImageSrc),
-      loadImage('/ov27-logo-color-v2.png')
+      loadImage('/summit-logo.png')
     ]);
     if (!img) return '';
 
@@ -339,31 +339,23 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
         ctx.stroke();
 
         if (logoImg && logoImg.width > 0) {
-          // White container pill for crisp logo contrast
-          const pillW = 160;
-          const pillH = 50;
-          const pillX = 75;
-          const pillY = 60;
-          ctx.fillStyle = '#FFFFFF';
-          ctx.beginPath();
-          ctx.roundRect(pillX, pillY, pillW, pillH, 12);
-          ctx.fill();
-
-          // Draw official OneVoice27 logo inside pill
+          // Draw official Summit logo directly with transparent background
           const lAspect = logoImg.width / logoImg.height;
-          const lH = 36;
-          const lW = Math.min(lH * lAspect, pillW - 16);
-          ctx.drawImage(logoImg, pillX + (pillW - lW) / 2, pillY + (pillH - lH) / 2, lW, lH);
+          const lH = 60;
+          const lW = lH * lAspect;
+          const lX = 75;
+          const lY = 55;
+          ctx.drawImage(logoImg, lX, lY, lW, lH);
 
           // Top Banner Typography
           ctx.textAlign = 'left';
-          ctx.font = 'bold 26px system-ui, sans-serif';
+          ctx.font = 'bold 24px system-ui, sans-serif';
           ctx.fillStyle = '#FFFFFF';
-          ctx.fillText('DIGITAL CREATOR SUMMIT', pillX + pillW + 24, 88);
+          ctx.fillText('DIGITAL CREATOR SUMMIT', lX + lW + 20, 84);
 
-          ctx.font = 'bold 16px system-ui, sans-serif';
+          ctx.font = 'bold 15px system-ui, sans-serif';
           ctx.fillStyle = '#00D5D8';
-          ctx.fillText('ONEVOICE27 · PANAMÁ · EN CRISTO TODAS LAS COSAS SON NUEVAS', pillX + pillW + 24, 114);
+          ctx.fillText('PNM26 · EN CRISTO TODAS LAS COSAS SON NUEVAS', lX + lW + 20, 108);
         } else {
           ctx.textAlign = 'center';
           ctx.font = 'bold 30px system-ui, sans-serif';
@@ -410,7 +402,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
         // Official Motto / Footer
         ctx.font = 'italic 18px system-ui, sans-serif';
         ctx.fillStyle = '#00D5D8';
-        ctx.fillText('“En Cristo, todas las cosas son nuevas” · 26 Nov 2026', size / 2, placardY + 145);
+        ctx.fillText('“En Cristo, todas las cosas son nuevas” · 7 Nov 2026', size / 2, placardY + 145);
 
         // Corner decorative stars
         ctx.font = 'bold 34px system-ui, sans-serif';
@@ -486,16 +478,11 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
         {/* Top Header */}
         <div className="px-5 py-3.5 bg-gradient-to-r from-[#1C0235] via-[#2D0652] to-[#E01E7E] text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="h-8 px-2 bg-white rounded-xl shadow-md flex items-center justify-center shrink-0 border border-white/30">
-              <img 
-                src="/ov27-logo-color-v2.png" 
-                alt="OneVoice27" 
-                className="h-5 w-auto object-contain"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                }}
-              />
-            </div>
+            <img 
+              src="/summit-logo.png" 
+              alt="Digital Creator Summit" 
+              className="h-7 sm:h-8 w-auto object-contain drop-shadow-md shrink-0"
+            />
             <div>
               <h3 className="text-sm font-black tracking-wider uppercase flex items-center gap-1.5">
                 <span>Foto de Acreditación Oficial</span>
@@ -616,12 +603,9 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
                   {/* Top Header Badge on Frame */}
                   <div className="absolute top-2 inset-x-3 sm:inset-x-4 bg-[#1C0235]/95 border border-[#E01E7E] rounded-xl px-2 py-1 flex items-center justify-center gap-2 shadow-lg">
                     <img 
-                      src="/ov27-logo-color-v2.png" 
-                      alt="OneVoice27" 
-                      className="h-3.5 sm:h-4 w-auto object-contain bg-white px-1.5 py-0.5 rounded"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                      }}
+                      src="/summit-logo.png" 
+                      alt="Digital Creator Summit" 
+                      className="h-5 sm:h-6 w-auto object-contain drop-shadow-sm"
                     />
                     <div className="text-left leading-none">
                       <span className="text-[10px] sm:text-xs font-black text-white tracking-widest block uppercase">
@@ -674,12 +658,9 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
 
                   <div className="absolute top-2 inset-x-3 sm:inset-x-4 bg-[#1C0235]/95 border border-[#E01E7E] rounded-xl px-2 py-1 flex items-center justify-center gap-2 shadow-lg">
                     <img 
-                      src="/ov27-logo-color-v2.png" 
-                      alt="OneVoice27" 
-                      className="h-3.5 sm:h-4 w-auto object-contain bg-white px-1.5 py-0.5 rounded"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                      }}
+                      src="/summit-logo.png" 
+                      alt="Digital Creator Summit" 
+                      className="h-5 sm:h-6 w-auto object-contain drop-shadow-sm"
                     />
                     <div className="text-left leading-none">
                       <span className="text-[10px] sm:text-xs font-black text-white tracking-widest block uppercase">

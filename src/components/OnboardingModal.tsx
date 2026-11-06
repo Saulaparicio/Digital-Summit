@@ -36,14 +36,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
       title: 'Digital Creator Summit PNM26',
       subtitle: '“En Cristo, todas las cosas son nuevas” · UnaVoz27',
       icon: (
-        <div className="w-20 h-16 rounded-2xl bg-white border border-purple-200 p-2 flex items-center justify-center shadow-lg shadow-[#E01E7E]/20 shrink-0">
+        <div className="w-24 h-16 flex items-center justify-center shrink-0">
           <img 
-            src="/ov27-logo-color-v2.png" 
-            alt="OneVoice27" 
-            className="w-full h-auto max-h-12 object-contain" 
-            onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-            }}
+            src="/summit-logo.png" 
+            alt="Digital Creator Summit" 
+            className="w-full h-auto max-h-14 object-contain drop-shadow-md" 
           />
         </div>
       ),
@@ -54,7 +51,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
       ),
       highlights: [
         'Lugar: Sede de la UAP, Edif. 0844, Balboa, Ancón',
-        'Horario: Jueves 26 de Noviembre · Desde las 7:45 AM hasta las 6:00 PM',
+        'Horario: Sábado 7 de Noviembre · Desde las 7:45 AM hasta las 6:00 PM',
         'Vestimenta: Casual / semiformal. Recibirás tu suéter oficial en color crema'
       ]
     },

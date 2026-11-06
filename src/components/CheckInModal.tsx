@@ -122,16 +122,11 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-purple-100 pb-3 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="h-9 px-2 bg-purple-50 rounded-xl border border-purple-200 flex items-center justify-center shadow-sm">
-              <img 
-                src="/ov27-logo-color-v2.png" 
-                alt="OneVoice27" 
-                className="h-5 w-auto object-contain"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                }}
-              />
-            </div>
+            <img 
+              src="/summit-logo.png" 
+              alt="Digital Creator Summit" 
+              className="h-9 w-auto object-contain drop-shadow-sm shrink-0"
+            />
             <div>
               <h3 className="text-sm sm:text-base font-black text-[#1C0235] tracking-tight uppercase">
                 Acreditación & Confirmación de Asistencia
@@ -253,16 +248,11 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
                 {/* Badge Top Header */}
                 <div className="flex items-center justify-between border-b border-purple-200/60 pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="h-7 px-2 bg-white rounded-lg border border-purple-200 shadow-sm flex items-center justify-center">
-                      <img 
-                        src="/ov27-logo-color-v2.png" 
-                        alt="OneVoice27" 
-                        className="h-4 w-auto object-contain"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-                        }}
-                      />
-                    </div>
+                    <img 
+                      src="/summit-logo.png" 
+                      alt="Digital Creator Summit" 
+                      className="h-7 w-auto object-contain drop-shadow-sm shrink-0"
+                    />
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider text-[#1C0235] block leading-none">
                         DIGITAL CREATOR SUMMIT PNM26

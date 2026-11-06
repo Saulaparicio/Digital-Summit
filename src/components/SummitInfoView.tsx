@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  MapPin, ExternalLink, Sparkles, Shirt, Clock, Instagram, 
-  Radio, BookOpen, Quote, Calendar, Timer, CheckCircle2, ChevronRight, AlertCircle 
+import {
+  MapPin, ExternalLink, Sparkles, Shirt, Clock, Instagram,
+  Radio, BookOpen, Quote, Calendar, Timer, CheckCircle2, ChevronRight, AlertCircle
 } from 'lucide-react';
 import { VENUE_INFO, SPECIAL_GUESTS } from '../data/summitData';
 
 export const SummitInfoView: React.FC = () => {
-  // Official Summit Start Date: November 26, 2026, 07:45 AM (Panama UTC-5)
-  const [targetDateStr, setTargetDateStr] = useState<string>('2026-11-26T07:45:00');
+  // Official Summit Start Date: November 7, 2026, 07:45 AM (Panama UTC-5)
+  const [targetDateStr, setTargetDateStr] = useState<string>('2026-11-07T07:45:00');
   const [now, setNow] = useState<Date>(() => new Date());
 
   // Dynamic ticking clock (1 second interval)
@@ -55,7 +55,7 @@ export const SummitInfoView: React.FC = () => {
 
       {/* LARGE 'DAYS UNTIL SUMMIT' COUNTDOWN TIMER CARD */}
       <div className="relative rounded-3xl p-6 sm:p-8 bg-white border-2 border-purple-200/90 shadow-2xl space-y-6 overflow-hidden text-slate-900">
-        
+
         {/* Background decorative summit stars */}
         <div className="absolute top-4 right-4 text-[#E01E7E] text-3xl font-black select-none opacity-20">
           ★
@@ -74,7 +74,7 @@ export const SummitInfoView: React.FC = () => {
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <span className="px-3 py-1 rounded-full bg-teal-50 text-[#007D80] border border-teal-200 text-xs font-black flex items-center gap-1.5 shadow-sm">
               <Calendar className="w-3.5 h-3.5 text-[#007D80]" />
-              <span>Jueves, 26 de Noviembre de 2026 · 07:45 AM</span>
+              <span>Sábado, 7 de Noviembre de 2026 · 07:45 AM</span>
             </span>
           </div>
         </div>
@@ -82,8 +82,8 @@ export const SummitInfoView: React.FC = () => {
         {/* Big Title */}
         <div className="space-y-1">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1C0235] tracking-tight leading-tight">
-            {countdown.isStarted 
-              ? '¡El Digital Creator Summit está en Vivo!' 
+            {countdown.isStarted
+              ? '¡El Digital Creator Summit está en Vivo!'
               : 'Días Restantes para el Encuentro'}
           </h2>
           <p className="text-xs sm:text-sm text-purple-900/80 font-medium max-w-2xl">
@@ -93,7 +93,7 @@ export const SummitInfoView: React.FC = () => {
 
         {/* Massive 4-Column Countdown Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-          
+
           {/* DÍAS */}
           <div className="bg-purple-50/70 border-2 border-purple-200/90 rounded-2xl p-4 sm:p-6 text-center space-y-1 shadow-md hover:border-[#E01E7E] transition-colors">
             <span className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl font-black font-mono text-[#E01E7E] block leading-none tabular-nums drop-shadow-sm">
@@ -167,10 +167,10 @@ export const SummitInfoView: React.FC = () => {
         </div>
 
       </div>
-      
+
       {/* Hero Motto Card - Clean White Card with Summit Typography & Accents */}
       <div className="relative rounded-3xl p-6 sm:p-8 bg-white border-2 border-purple-200/90 shadow-2xl space-y-4 overflow-hidden">
-        
+
         {/* Decorative corner stars */}
         <div className="absolute top-4 right-4 text-[#E01E7E] text-2xl font-black select-none opacity-20">
           ★
@@ -185,16 +185,11 @@ export const SummitInfoView: React.FC = () => {
             <span>DIGITAL CREATOR SUMMIT PNM26</span>
           </div>
 
-          <div className="h-8 px-2.5 bg-purple-50 border border-purple-200 rounded-xl flex items-center justify-center self-start sm:self-auto shadow-sm">
-            <img 
-              src="/ov27-logo-color-v2.png" 
-              alt="OneVoice27" 
-              className="h-5 w-auto object-contain"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-              }}
-            />
-          </div>
+          <img
+            src="/summit-logo.png"
+            alt="Digital Creator Summit"
+            className="h-8 sm:h-9 w-auto object-contain drop-shadow-sm self-start sm:self-auto"
+          />
         </div>
 
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1C0235] tracking-tight leading-tight">
@@ -216,7 +211,7 @@ export const SummitInfoView: React.FC = () => {
 
       {/* General Event Logistics with authentic Cyan Badges (01, 02, 03) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
+
         {/* Venue (01) */}
         <div className="bg-white border-2 border-purple-200/90 rounded-2xl p-5 space-y-3.5 shadow-lg flex flex-col justify-between">
           <div className="space-y-3">

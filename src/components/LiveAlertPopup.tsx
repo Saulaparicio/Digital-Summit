@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { AgendaItem } from '../types/agenda';
 import { formatSecondsToDigital, formatTo12Hour } from '../utils/timeUtils';
+import { BorderBeam } from './magicui/BorderBeam';
 
 interface LiveAlertPopupProps {
   activity: AgendaItem | null;
@@ -95,6 +96,14 @@ export const LiveAlertPopup: React.FC<LiveAlertPopupProps> = ({
       <div className={`relative z-10 max-w-lg w-full mx-auto my-auto shadow-2xl rounded-3xl overflow-hidden border-2 bg-white text-slate-900 animate-in zoom-in-95 duration-200 shadow-purple-950/40 ${
         isStartingNow ? 'border-[#00D5D8]' : 'border-[#E01E7E]'
       }`}>
+        {/* Animated Border Beam */}
+        <BorderBeam
+          size={240}
+          duration={5}
+          colorFrom={isStartingNow ? '#00D5D8' : '#E01E7E'}
+          colorTo={isStartingNow ? '#E01E7E' : '#00D5D8'}
+          borderWidth={2.5}
+        />
         
         {/* Top Banner Accent */}
         <div className={`px-4 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between text-xs sm:text-sm font-black tracking-wider ${

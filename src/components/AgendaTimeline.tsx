@@ -11,6 +11,7 @@ import {
   getActivityMetrics, 
   formatSecondsToDigital 
 } from '../utils/timeUtils';
+import { BorderBeam } from './magicui/BorderBeam';
 
 interface AgendaTimelineProps {
   items: AgendaItem[];
@@ -316,7 +317,7 @@ export const AgendaTimeline: React.FC<AgendaTimelineProps> = ({
       </div>
 
       {/* Main Agenda Cards List with Pure White Backgrounds & Summit Colors */}
-      <div className="space-y-3.5">
+      <div className="space-y-4 sm:space-y-6 pb-24">
         {filteredItems.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-3xl border border-purple-200 shadow-md">
             <p className="text-purple-900 text-sm">No se encontraron actividades con ese criterio de búsqueda.</p>
@@ -328,7 +329,7 @@ export const AgendaTimeline: React.FC<AgendaTimelineProps> = ({
             </button>
           </div>
         ) : (
-          filteredItems.map((item) => {
+          filteredItems.map((item, index) => {
             const isNextCandidate = item.id === nextCandidateId;
             const metrics = getActivityMetrics(item, currentSecondsOfDay, isNextCandidate);
             const isTargetHighlight = targetHighlightId === item.id;
@@ -345,12 +346,26 @@ export const AgendaTimeline: React.FC<AgendaTimelineProps> = ({
                 <div
                   key={item.id}
                   id={item.id}
-                  className={`rounded-2xl p-4 sm:p-5 transition-all text-center border ${
+                  style={{
+                    top: `calc(var(--cards-sticky-top, 5rem) + ${(index % 5) * 8}px)`,
+                    zIndex: 10 + index,
+                  }}
+                  className={`sticky relative overflow-hidden rounded-2xl p-4 sm:p-5 transition-all text-center border shadow-xl ${
                     isCurrent
-                      ? 'bg-gradient-to-r from-[#D91A80] to-[#FF2E93] text-white border-pink-300 shadow-xl shadow-pink-950/40 ring-4 ring-[#00D5D8]'
+                      ? 'bg-gradient-to-r from-[#D91A80] to-[#FF2E93] text-white border-pink-300 shadow-2xl shadow-pink-950/40 ring-4 ring-[#00D5D8]'
                       : 'bg-gradient-to-r from-[#B51065] via-[#D91A80] to-[#B51065] text-white border-pink-300 shadow-lg'
                   }`}
                 >
+                  {/* Border Beam animated effect when break is active */}
+                  {isCurrent && (
+                    <BorderBeam
+                      size={240}
+                      duration={5}
+                      colorFrom="#FFFFFF"
+                      colorTo="#00D5D8"
+                      borderWidth={2.5}
+                    />
+                  )}
                   <div className="flex items-center justify-between text-xs font-semibold px-2 mb-1">
                     <span className="font-mono text-pink-100 bg-black/25 px-2.5 py-0.5 rounded-full font-bold">
                       {formatTo12Hour(item.startTime)} – {formatTo12Hour(item.endTime)}
@@ -382,16 +397,30 @@ export const AgendaTimeline: React.FC<AgendaTimelineProps> = ({
               <div
                 key={item.id}
                 id={item.id}
-                className={`group relative rounded-2xl p-4 sm:p-5 transition-all duration-300 border text-slate-900 ${
+                style={{
+                  top: `calc(var(--cards-sticky-top, 5rem) + ${(index % 5) * 8}px)`,
+                  zIndex: 10 + index,
+                }}
+                className={`sticky group relative overflow-hidden rounded-2xl p-4 sm:p-5 transition-all duration-300 border text-slate-900 shadow-xl ${
                   isCurrent
-                    ? 'bg-white border-2 border-[#E01E7E] shadow-xl shadow-[#E01E7E]/20 ring-4 ring-[#E01E7E]/15'
+                    ? 'bg-white border-2 border-[#E01E7E] shadow-2xl shadow-[#E01E7E]/25 ring-4 ring-[#E01E7E]/15'
                     : isNext
                       ? 'bg-white border-2 border-[#00B4B7] shadow-xl shadow-[#00D5D8]/20 ring-2 ring-[#00D5D8]/20'
                       : isCompleted
-                        ? 'bg-white/95 border border-purple-100 shadow-sm opacity-85 hover:opacity-100'
-                        : 'bg-white border border-purple-200/80 hover:border-purple-400 shadow-md hover:shadow-xl'
+                        ? 'bg-white/95 backdrop-blur-sm border border-purple-100 shadow-md opacity-90 hover:opacity-100'
+                        : 'bg-white border border-purple-200/90 hover:border-purple-400 shadow-lg hover:shadow-2xl'
                 } ${isTargetHighlight ? 'ring-4 ring-[#00D5D8] ring-offset-2 ring-offset-white' : ''}`}
               >
+                {/* Border Beam animated effect when activity is in progress */}
+                {isCurrent && (
+                  <BorderBeam
+                    size={220}
+                    duration={5}
+                    colorFrom="#E01E7E"
+                    colorTo="#00D5D8"
+                    borderWidth={2.5}
+                  />
+                )}
                 {/* Status Bar for Current Activity on White Card */}
                 {isCurrent && (
                   <div className="mb-3.5 space-y-1.5">

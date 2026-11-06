@@ -9,6 +9,7 @@ import {
   formatTo12Hour, 
   getActivityMetrics 
 } from '../utils/timeUtils';
+import { BorderBeam } from './magicui/BorderBeam';
 
 interface StageTimerViewProps {
   currentActivity: AgendaItem | null;
@@ -131,6 +132,16 @@ export const StageTimerView: React.FC<StageTimerViewProps> = ({
 
       {/* Main Big Stage Monitor Card (White card) */}
       <div className={`relative rounded-3xl border-2 ${timerCardBorder} ${timerCardBg} p-4 sm:p-10 text-center space-y-5 sm:space-y-6 shadow-2xl overflow-hidden transition-colors`}>
+        {/* Border Beam animated effect for stage card */}
+        {currentActivity && (
+          <BorderBeam
+            size={280}
+            duration={6}
+            colorFrom={secondsLeft <= 60 ? '#E01E7E' : '#00D5D8'}
+            colorTo={secondsLeft <= 60 ? '#FF2E93' : '#E01E7E'}
+            borderWidth={3}
+          />
+        )}
         
         {/* Stage Status Flag */}
         <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] sm:text-xs font-black uppercase tracking-wider shadow-sm ${badgeColor}`}>

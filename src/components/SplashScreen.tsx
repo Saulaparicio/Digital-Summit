@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Sparkles, ArrowRight, Radio } from 'lucide-react';
+import { BorderBeam } from './magicui/BorderBeam';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -20,9 +21,6 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onSkip }
 
       if (pct >= 100) {
         clearInterval(timer);
-        setTimeout(() => {
-          onComplete();
-        }, 200);
       }
     }, 40);
 
@@ -53,28 +51,23 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onSkip }
         </button>
       </div>
 
-      {/* Center Brand Identity Section: Official ONEVOICE27 Logo */}
+      {/* Center Brand Identity Section: Official Summit Logo */}
       <div className="flex flex-col items-center justify-center text-center max-w-sm sm:max-w-md w-full space-y-5 z-10 my-auto">
         
-        {/* Official OneVoice27 Logo Card */}
-        <div className="relative group w-full max-w-xs sm:max-w-sm">
-          <div className="p-4 sm:p-5 bg-white rounded-3xl shadow-2xl shadow-[#E01E7E]/40 border-2 border-[#00D5D8]/60 flex flex-col items-center justify-center animate-in zoom-in-95 duration-500">
-            <img 
-              src="/ov27-logo-color-v2.png" 
-              alt="OneVoice27 · Misión Para Todos" 
-              className="w-full h-auto max-h-16 sm:max-h-20 object-contain drop-shadow-sm"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-              }}
-            />
-          </div>
-
-          <div className="absolute -top-3 -right-3 text-[#E01E7E] text-3xl font-black animate-spin select-none" style={{ animationDuration: '10s' }}>
-            ★
-          </div>
-          <div className="absolute -bottom-3 -left-3 text-[#00D5D8] text-2xl font-black select-none">
-            ✦
-          </div>
+        {/* Official Summit Logo with Animated Border Beam */}
+        <div className="relative group w-full max-w-xs sm:max-w-sm rounded-3xl p-6 sm:p-7 bg-[#1D0336]/60 backdrop-blur-md border border-[#470B7E]/80 shadow-2xl overflow-hidden flex items-center justify-center">
+          <BorderBeam
+            size={240}
+            duration={5}
+            colorFrom="#E01E7E"
+            colorTo="#00D5D8"
+            borderWidth={2.5}
+          />
+          <img 
+            src="/summit-logo.png" 
+            alt="Digital Creator Summit" 
+            className="w-full h-auto max-h-24 sm:max-h-32 object-contain drop-shadow-[0_12px_24px_rgba(224,30,126,0.4)] animate-in zoom-in-95 duration-500"
+          />
         </div>
 
         {/* Brand Details */}
@@ -94,7 +87,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onSkip }
             “En Cristo, todas las cosas son nuevas.”
           </p>
           <span className="text-[10px] text-purple-400 font-semibold block">
-            2 Corintios 5:17 · 26 de Noviembre de 2026
+            2 Corintios 5:17 · 7 de Noviembre de 2026
           </span>
         </div>
 
@@ -112,16 +105,26 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onSkip }
         </div>
 
         <div className="flex items-center justify-between text-[10px] text-purple-300 font-mono font-bold px-1">
-          <span>Cargando Agenda y Acreditación</span>
+          <span>{progress >= 100 ? '¡Listo para comenzar!' : 'Cargando Agenda y Acreditación'}</span>
           <span>{progress}%</span>
         </div>
 
-        <button
-          onClick={onComplete}
-          className="text-xs text-white/80 hover:text-white underline font-semibold transition-opacity"
-        >
-          Tocar para continuar
-        </button>
+        {progress >= 100 ? (
+          <button
+            onClick={onComplete}
+            className="w-full min-h-[46px] px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#E01E7E] to-[#FF2E93] hover:from-[#C21268] hover:to-[#E01E7E] active:scale-95 text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#E01E7E]/40 transition-all animate-in zoom-in-95 cursor-pointer"
+          >
+            <span>Siguiente</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        ) : (
+          <button
+            onClick={onComplete}
+            className="text-xs text-purple-300 hover:text-white underline font-semibold transition-opacity"
+          >
+            Saltar carga
+          </button>
+        )}
       </div>
 
     </div>

@@ -1,7 +1,8 @@
 import { AgendaItem, Delegate, SpecialGuest } from '../types/agenda';
 
-export const ONEVOICE_LOGO_URL = '/ov27-logo-color-v2.png';
-export const ONEVOICE_LOGO_FALLBACK = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
+export const ONEVOICE_LOGO_URL = '/summit-logo.png';
+export const SUMMIT_LOGO_URL = '/summit-logo.png';
+export const ONEVOICE_LOGO_FALLBACK = '/summit-logo.png';
 
 export const OFFICIAL_SUMMIT_AGENDA: AgendaItem[] = [
   {

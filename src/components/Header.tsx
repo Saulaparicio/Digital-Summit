@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Clock, Volume2, VolumeX, Bell, BellOff, Sparkles, UserCheck, History, Calendar, CheckCircle2, ChevronDown, X } from 'lucide-react';
+import { Clock, Volume2, VolumeX, Bell, BellOff, Sparkles, UserCheck, History, Calendar, CheckCircle2, ChevronDown, X, Settings } from 'lucide-react';
 import { formatTo12Hour } from '../utils/timeUtils';
 
 interface HeaderProps {
@@ -47,12 +47,22 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [showProgressTooltip, setShowProgressTooltip] = useState(false);
   const progressWidgetRef = useRef<HTMLDivElement>(null);
+  const [showToolsMenu, setShowToolsMenu] = useState(false);
+  const toolsMenuRef = useRef<HTMLDivElement>(null);
+  const mobileToolsMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close tooltip when clicking outside
+  // Close tooltips and dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (progressWidgetRef.current && !progressWidgetRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (progressWidgetRef.current && !progressWidgetRef.current.contains(target)) {
         setShowProgressTooltip(false);
+      }
+      if (
+        toolsMenuRef.current && !toolsMenuRef.current.contains(target) &&
+        (!mobileToolsMenuRef.current || !mobileToolsMenuRef.current.contains(target))
+      ) {
+        setShowToolsMenu(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -79,33 +89,20 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#1D0336]/95 backdrop-blur-md border-b border-[#470B7E]/60 shadow-lg shadow-[#120124]/50">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 md:gap-8">
-        
-        {/* Zone 1: Authentic Summit Brand Wordmark & Official OneVoice27 Logo */}
+
+        {/* Zone 1: Authentic Summit Brand Wordmark & Official Logo */}
         <div className="flex items-center gap-2 sm:gap-3 shrink min-w-0">
-          <div className="h-8 sm:h-9 px-2 bg-white rounded-xl shadow-md flex items-center justify-center shrink-0 border border-white/30">
-            <img 
-              src="/ov27-logo-color-v2.png" 
-              alt="OneVoice27 Logo" 
-              className="h-5 sm:h-6 w-auto object-contain"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = 'https://adventista.es/wp-content/uploads/2026/09/ov27-logo-color-v2.png';
-              }}
-            />
-          </div>
+          <img
+            src="/summit-logo.png"
+            alt="Digital Creator Summit"
+            className="h-8 sm:h-9 md:h-10 w-auto object-contain drop-shadow-md shrink-0"
+          />
           <div className="flex flex-col min-w-0">
-            <div className="flex items-baseline gap-1 leading-none truncate">
-              <span className="text-xs sm:text-base font-black tracking-wider text-white uppercase truncate">
-                DIGITAL CREATOR
-              </span>
-              <span className="font-script text-base sm:text-xl font-bold text-[#E01E7E] drop-shadow-sm shrink-0">
-                Summit
-              </span>
-              <span className="text-[9px] sm:text-[10px] font-bold text-[#00D5D8] bg-[#00D5D8]/10 border border-[#00D5D8]/30 px-1 rounded shrink-0">
-                PNM26
-              </span>
-            </div>
-            <span className="text-[9px] sm:text-[10px] text-purple-300/80 font-medium tracking-tight truncate hidden xs:block">
-              UnaVoz27 · Unión Adventista Panameña
+            <span className="text-[9px] sm:text-[10px] font-bold text-[#00D5D8] bg-[#00D5D8]/10 border border-[#00D5D8]/30 px-1.5 py-0.2 rounded-full shrink-0 self-start">
+              PNM26
+            </span>
+            <span className="text-[9px] sm:text-[10px] text-purple-300/80 font-medium tracking-tight truncate hidden xs:block mt-0.5">
+              Unión Adventista Panameña
             </span>
           </div>
         </div>
@@ -114,68 +111,124 @@ export const Header: React.FC<HeaderProps> = ({
         <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           <button
             onClick={() => setActiveView('agenda')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 ${
-              activeView === 'agenda'
+            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 ${activeView === 'agenda'
                 ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
                 : 'text-purple-200 hover:text-white hover:bg-[#340760]'
-            }`}
+              }`}
           >
             Cronograma en Vivo
           </button>
           <button
-            onClick={() => setActiveView('stage')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-              activeView === 'stage'
-                ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
-                : 'text-purple-200 hover:text-white hover:bg-[#340760]'
-            }`}
-          >
-            <Clock className="w-3.5 h-3.5 text-[#00D5D8]" />
-            Cronómetro
-          </button>
-          <button
-            onClick={() => setActiveView('history')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-              activeView === 'history'
-                ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
-                : 'text-purple-200 hover:text-white hover:bg-[#340760]'
-            }`}
-          >
-            <History className="w-3.5 h-3.5 text-[#00D5D8]" />
-            <span>Historial</span>
-            <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-              activeView === 'history' ? 'bg-white/20 text-white' : 'bg-[#17022C] text-[#00D5D8] border border-[#00D5D8]/40'
-            }`}>
-              {completedCount}
-            </span>
-          </button>
-          <button
             onClick={() => setActiveView('delegates')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-              activeView === 'delegates'
+            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${activeView === 'delegates'
                 ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
                 : 'text-purple-200 hover:text-white hover:bg-[#340760]'
-            }`}
+              }`}
           >
             <UserCheck className="w-3.5 h-3.5" />
             Delegados (94)
           </button>
           <button
             onClick={() => setActiveView('info')}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-              activeView === 'info'
+            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${activeView === 'info'
                 ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
                 : 'text-purple-200 hover:text-white hover:bg-[#340760]'
-            }`}
+              }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-[#00D5D8]" />
             Guía & Redes
           </button>
+
+          {/* Submenú con icono de engranaje (Cronómetro e Historial) */}
+          <div className="relative shrink-0" ref={toolsMenuRef}>
+            <button
+              onClick={() => setShowToolsMenu(!showToolsMenu)}
+              className={`px-2.5 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${activeView === 'stage' || activeView === 'history'
+                  ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
+                  : showToolsMenu
+                    ? 'bg-[#340760] text-white ring-1 ring-[#00D5D8]/50'
+                    : 'text-purple-200 hover:text-white hover:bg-[#340760]'
+                }`}
+              title="Herramientas: Cronómetro e Historial"
+              aria-label="Menú de herramientas"
+              aria-expanded={showToolsMenu}
+            >
+              <Settings className={`w-3.5 h-3.5 ${activeView === 'stage' || activeView === 'history' ? 'text-white' : 'text-[#00D5D8]'} ${showToolsMenu ? 'rotate-45' : ''} transition-transform duration-200`} />
+              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${showToolsMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Dropdown del Submenú */}
+            {showToolsMenu && (
+              <div className="absolute right-0 top-full mt-2 w-56 bg-[#1D0336]/98 backdrop-blur-md border border-[#470B7E] rounded-2xl p-1.5 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 text-white space-y-1">
+                <div className="px-2.5 py-1.5 border-b border-[#470B7E]/60 flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-purple-300">
+                  <span className="flex items-center gap-1.5">
+                    <Settings className="w-3 h-3 text-[#00D5D8]" />
+                    Herramientas
+                  </span>
+                  {(activeView === 'stage' || activeView === 'history') && (
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#E01E7E] text-white font-bold">Activo</span>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => {
+                    setActiveView('stage');
+                    setShowToolsMenu(false);
+                  }}
+                  className={`w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 ${activeView === 'stage'
+                      ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
+                      : 'text-purple-200 hover:text-white hover:bg-[#340760]'
+                    }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Clock className={`w-4 h-4 ${activeView === 'stage' ? 'text-white' : 'text-[#00D5D8]'}`} />
+                    <span>Cronómetro</span>
+                  </div>
+                  {activeView === 'stage' && <span className="text-[11px] font-bold">✓</span>}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setActiveView('history');
+                    setShowToolsMenu(false);
+                  }}
+                  className={`w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 ${activeView === 'history'
+                      ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
+                      : 'text-purple-200 hover:text-white hover:bg-[#340760]'
+                    }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <History className={`w-4 h-4 ${activeView === 'history' ? 'text-white' : 'text-[#00D5D8]'}`} />
+                    <span>Historial</span>
+                  </div>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${activeView === 'history' ? 'bg-white/20 text-white' : 'bg-[#17022C] text-[#00D5D8] border border-[#00D5D8]/40'
+                    }`}>
+                    {completedCount}
+                  </span>
+                </button>
+
+                {onOpenWelcome && (
+                  <button
+                    onClick={() => {
+                      onOpenWelcome();
+                      setShowToolsMenu(false);
+                    }}
+                    className="w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 text-purple-200 hover:text-white hover:bg-[#340760]"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-[#00D5D8]" />
+                      <span>Pantalla de Bienvenida</span>
+                    </div>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Zone 3: Status / Controls & Circular Event Progress */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          
+
           {/* Circular Event Progress Gauge */}
           <div className="relative" ref={progressWidgetRef}>
             <button
@@ -324,11 +377,10 @@ export const Header: React.FC<HeaderProps> = ({
           {onOpenCheckIn && (
             <button
               onClick={onOpenCheckIn}
-              className={`min-h-[34px] sm:min-h-[38px] px-2.5 sm:px-3 py-1 text-xs font-black rounded-xl transition-all flex items-center gap-1.5 shadow-sm active:scale-95 whitespace-nowrap ${
-                isMyAttendanceConfirmed
+              className={`min-h-[34px] sm:min-h-[38px] px-2.5 sm:px-3 py-1 text-xs font-black rounded-xl transition-all flex items-center gap-1.5 shadow-sm active:scale-95 whitespace-nowrap ${isMyAttendanceConfirmed
                   ? 'bg-teal-50 text-[#007D80] border-2 border-[#00B4B7] hover:bg-teal-100 shadow-teal-500/15'
                   : 'bg-[#E01E7E] hover:bg-[#C21268] text-white shadow-md shadow-[#E01E7E]/30 ring-2 ring-[#E01E7E]/30'
-              }`}
+                }`}
               title={isMyAttendanceConfirmed ? "Ver mi credencial y gafete oficial de acreditación" : "Buscarme y confirmar mi asistencia al evento"}
             >
               <UserCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
@@ -345,11 +397,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setIsSimulated(!isSimulated)}
             title={isSimulated ? "Estás en Modo Simulación" : "Estás en Hora Real del dispositivo"}
-            className={`px-2 sm:px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap ${
-              isSimulated
+            className={`px-2 sm:px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap ${isSimulated
                 ? 'bg-amber-950/60 text-amber-300 border-amber-600/50 hover:bg-amber-900/60'
                 : 'bg-[#00D5D8]/10 text-[#00D5D8] border-[#00D5D8]/40 hover:bg-[#00D5D8]/20'
-            }`}
+              }`}
           >
             <span className={`w-2 h-2 rounded-full ${isSimulated ? 'bg-amber-400 animate-pulse' : 'bg-[#00D5D8]'}`}></span>
             <span className="font-mono tabular-nums">{currentFormattedTime}</span>
@@ -362,11 +413,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={toggleSound}
             title={soundMuted ? "Activar sonido de alertas" : "Silenciar sonido de alertas"}
-            className={`p-1.5 rounded-lg border transition-colors ${
-              soundMuted
+            className={`p-1.5 rounded-lg border transition-colors ${soundMuted
                 ? 'bg-[#29054A] text-purple-400 border-[#470B7E]'
                 : 'bg-[#29054A] text-[#E01E7E] border-[#E01E7E]/50 hover:bg-[#3B076C]'
-            }`}
+              }`}
             aria-label="Alternar sonido"
           >
             {soundMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -376,11 +426,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={toggleNotifications}
             title={notificationsEnabled ? "Notificaciones de escritorio activadas" : "Activar notificaciones de escritorio"}
-            className={`p-1.5 rounded-lg border transition-colors ${
-              notificationsEnabled
+            className={`p-1.5 rounded-lg border transition-colors ${notificationsEnabled
                 ? 'bg-[#E01E7E] text-white border-[#E01E7E]'
                 : 'bg-[#29054A] text-purple-400 border-[#470B7E] hover:text-white'
-            }`}
+              }`}
             aria-label="Alternar notificaciones de escritorio"
           >
             {notificationsEnabled ? <Bell className="w-4 h-4" /> : <BellOff className="w-4 h-4" />}
@@ -404,50 +453,25 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex md:hidden items-center px-3 py-2 border-t border-[#470B7E]/60 bg-[#1D0336] overflow-x-auto gap-1.5 scrollbar-none">
         <button
           onClick={() => setActiveView('agenda')}
-          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${
-            activeView === 'agenda' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
-          }`}
+          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${activeView === 'agenda' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
+            }`}
         >
           Cronograma
         </button>
         <button
-          onClick={() => setActiveView('stage')}
-          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
-            activeView === 'stage' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
-          }`}
-        >
-          <Clock className="w-3.5 h-3.5 text-[#00D5D8]" />
-          <span>Cronómetro</span>
-        </button>
-        <button
-          onClick={() => setActiveView('history')}
-          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${
-            activeView === 'history' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
-          }`}
-        >
-          <span>Historial</span>
-          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-black ${
-            activeView === 'history' ? 'bg-white text-[#E01E7E]' : 'bg-[#00D5D8] text-[#1C0235]'
-          }`}>
-            {completedCount}
-          </span>
-        </button>
-        <button
           onClick={() => setActiveView('delegates')}
-          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${
-            activeView === 'delegates' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
-          }`}
+          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${activeView === 'delegates' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
+            }`}
         >
           Delegados
         </button>
         {onOpenCheckIn && (
           <button
             onClick={onOpenCheckIn}
-            className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-black transition-all shrink-0 flex items-center gap-1.5 ${
-              isMyAttendanceConfirmed
+            className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-black transition-all shrink-0 flex items-center gap-1.5 ${isMyAttendanceConfirmed
                 ? 'bg-teal-50 text-[#007D80] border border-teal-300'
                 : 'bg-gradient-to-r from-[#E01E7E] to-[#C21268] text-white shadow-md shadow-[#E01E7E]/30'
-            }`}
+              }`}
           >
             <UserCheck className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>{isMyAttendanceConfirmed ? 'Mi Gafete' : 'Check-in'}</span>
@@ -455,12 +479,97 @@ export const Header: React.FC<HeaderProps> = ({
         )}
         <button
           onClick={() => setActiveView('info')}
-          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${
-            activeView === 'info' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
-          }`}
+          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 ${activeView === 'info' ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30' : 'text-purple-200 hover:text-white bg-[#260447]'
+            }`}
         >
           Guía & Redes
         </button>
+
+        {/* Mobile Submenu con icono de engranaje (Cronómetro e Historial) */}
+        <div className="relative shrink-0" ref={mobileToolsMenuRef}>
+          <button
+            onClick={() => setShowToolsMenu(!showToolsMenu)}
+            className={`min-h-[38px] px-3 py-1.5 rounded-xl whitespace-nowrap text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 ${activeView === 'stage' || activeView === 'history'
+                ? 'text-white bg-[#E01E7E] shadow-md shadow-[#E01E7E]/30'
+                : showToolsMenu
+                  ? 'bg-[#340760] text-white ring-1 ring-[#00D5D8]/50'
+                  : 'text-purple-200 hover:text-white bg-[#260447]'
+              }`}
+            title="Herramientas: Cronómetro e Historial"
+            aria-label="Menú de herramientas"
+            aria-expanded={showToolsMenu}
+          >
+            <Settings className={`w-3.5 h-3.5 ${activeView === 'stage' || activeView === 'history' ? 'text-white' : 'text-[#00D5D8]'} ${showToolsMenu ? 'rotate-45' : ''} transition-transform duration-200`} />
+            <span>Herramientas</span>
+            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${showToolsMenu ? 'rotate-180' : ''}`} />
+          </button>
+
+          {showToolsMenu && (
+            <div className="absolute right-0 top-full mt-2 w-56 bg-[#1D0336]/98 backdrop-blur-md border border-[#470B7E] rounded-2xl p-1.5 shadow-2xl z-50 text-white space-y-1">
+              <div className="px-2.5 py-1.5 border-b border-[#470B7E]/60 flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-purple-300">
+                <span className="flex items-center gap-1.5">
+                  <Settings className="w-3 h-3 text-[#00D5D8]" />
+                  Herramientas
+                </span>
+                {(activeView === 'stage' || activeView === 'history') && (
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#E01E7E] text-white font-bold">Activo</span>
+                )}
+              </div>
+
+              <button
+                onClick={() => {
+                  setActiveView('stage');
+                  setShowToolsMenu(false);
+                }}
+                className={`w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 ${activeView === 'stage'
+                    ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
+                    : 'text-purple-200 hover:text-white hover:bg-[#340760]'
+                  }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Clock className={`w-4 h-4 ${activeView === 'stage' ? 'text-white' : 'text-[#00D5D8]'}`} />
+                  <span>Cronómetro</span>
+                </div>
+                {activeView === 'stage' && <span className="text-[11px] font-bold">✓</span>}
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveView('history');
+                  setShowToolsMenu(false);
+                }}
+                className={`w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 ${activeView === 'history'
+                    ? 'bg-[#E01E7E] text-white shadow-md shadow-[#E01E7E]/30'
+                    : 'text-purple-200 hover:text-white hover:bg-[#340760]'
+                  }`}
+              >
+                <div className="flex items-center gap-2">
+                  <History className={`w-4 h-4 ${activeView === 'history' ? 'text-white' : 'text-[#00D5D8]'}`} />
+                  <span>Historial</span>
+                </div>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${activeView === 'history' ? 'bg-white/20 text-white' : 'bg-[#17022C] text-[#00D5D8] border border-[#00D5D8]/40'
+                  }`}>
+                  {completedCount}
+                </span>
+              </button>
+
+              {onOpenWelcome && (
+                <button
+                  onClick={() => {
+                    onOpenWelcome();
+                    setShowToolsMenu(false);
+                  }}
+                  className="w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between gap-2 text-purple-200 hover:text-white hover:bg-[#340760]"
+                >
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#00D5D8]" />
+                    <span>Pantalla de Bienvenida</span>
+                  </div>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
