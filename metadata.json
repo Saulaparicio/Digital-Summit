@@ -1,0 +1,6 @@
+{
+  "name": "Gestor de Agenda y Tiempo Real - Digital Creator Summit",
+  "description": "Aplicación en tiempo real para gestionar la agenda del evento con avisos de próximas actividades, resaltado en vivo, cronómetro de escenario y alertas configurables.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
