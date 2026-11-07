@@ -68,7 +68,7 @@ export const SummitInfoView: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-100 pb-4">
           <div className="flex items-center gap-2 text-[#E01E7E] text-xs font-black uppercase tracking-wider">
             <Timer className="w-4 h-4 text-[#E01E7E]" />
-            <span>CUENTA REGRESIVA OFICIAL · DIGITAL CREATOR SUMMIT PNM26</span>
+            <span>CUENTA REGRESIVA OFICIAL · DIGITAL CREATOR SUMMIT 26</span>
           </div>
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
@@ -182,7 +182,7 @@ export const SummitInfoView: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-100 pb-3">
           <div className="flex items-center gap-2 text-[#E01E7E] text-xs font-black uppercase tracking-wider">
             <Sparkles className="w-4 h-4 text-[#E01E7E]" />
-            <span>DIGITAL CREATOR SUMMIT PNM26</span>
+            <span>DIGITAL CREATOR SUMMIT 26</span>
           </div>
 
           <img

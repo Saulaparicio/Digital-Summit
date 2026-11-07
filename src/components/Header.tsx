@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({
           />
           <div className="flex flex-col min-w-0">
             <span className="text-[9px] sm:text-[10px] font-bold text-[#00D5D8] bg-[#00D5D8]/10 border border-[#00D5D8]/30 px-1.5 py-0.2 rounded-full shrink-0 self-start">
-              PNM26
+              26
             </span>
             <span className="text-[9px] sm:text-[10px] text-purple-300/80 font-medium tracking-tight truncate hidden xs:block mt-0.5">
               Unión Adventista Panameña

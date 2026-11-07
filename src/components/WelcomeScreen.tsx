@@ -115,7 +115,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
             <div className="flex items-center gap-2">
               <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-black uppercase text-[#00D5D8] border border-white/20">
-                PNM26
+                26
               </span>
               <button
                 onClick={onClose}

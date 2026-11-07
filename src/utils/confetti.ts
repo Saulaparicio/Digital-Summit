@@ -1,7 +1,7 @@
 import confetti from 'canvas-confetti';
 
 /**
- * Trigger celebration confetti with authentic Digital Creator Summit PNM26 / OneVoice27 color palette
+ * Trigger celebration confetti with authentic Digital Creator Summit 26 / OneVoice27 color palette
  */
 export const triggerSummitConfetti = () => {
   // Summit palette colors

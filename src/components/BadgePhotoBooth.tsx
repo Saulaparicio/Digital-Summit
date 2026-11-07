@@ -355,12 +355,12 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
 
           ctx.font = 'bold 15px system-ui, sans-serif';
           ctx.fillStyle = '#00D5D8';
-          ctx.fillText('PNM26 · EN CRISTO TODAS LAS COSAS SON NUEVAS', lX + lW + 20, 108);
+          ctx.fillText('26 · EN CRISTO TODAS LAS COSAS SON NUEVAS', lX + lW + 20, 108);
         } else {
           ctx.textAlign = 'center';
           ctx.font = 'bold 30px system-ui, sans-serif';
           ctx.fillStyle = '#FFFFFF';
-          ctx.fillText('★ DIGITAL CREATOR SUMMIT PNM26 ★', size / 2, 90);
+          ctx.fillText('★ DIGITAL CREATOR SUMMIT 26 ★', size / 2, 90);
 
           ctx.font = 'bold 18px system-ui, sans-serif';
           ctx.fillStyle = '#00D5D8';
@@ -439,7 +439,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
       const a = document.createElement('a');
       a.href = finalDataUrl;
       const cleanName = delegate.name.replace(/\s+/g, '_');
-      a.download = `Foto_Summit_PNM26_${cleanName}.jpg`;
+      a.download = `Foto_Summit_26_${cleanName}.jpg`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -486,7 +486,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
             <div>
               <h3 className="text-sm font-black tracking-wider uppercase flex items-center gap-1.5">
                 <span>Foto de Acreditación Oficial</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#00D5D8] text-[#1C0235] font-black">PNM26</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#00D5D8] text-[#1C0235] font-black">26</span>
               </h3>
               <p className="text-[11px] text-purple-200 font-medium">
                 {rawImageSrc ? 'Encuadra y ajusta tu foto dentro del marco' : `Fotografía para ${delegate.name}`}
@@ -612,7 +612,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
                         DIGITAL CREATOR SUMMIT
                       </span>
                       <span className="text-[8px] font-bold text-[#00D5D8] block">
-                        PNM26 · UNAVOZ27
+                        26 · UNAVOZ27
                       </span>
                     </div>
                   </div>
@@ -667,7 +667,7 @@ export const BadgePhotoBooth: React.FC<BadgePhotoBoothProps> = ({
                         DIGITAL CREATOR SUMMIT
                       </span>
                       <span className="text-[8px] font-bold text-[#00D5D8] block">
-                        PNM26 · UNAVOZ27
+                        26 · UNAVOZ27
                       </span>
                     </div>
                   </div>

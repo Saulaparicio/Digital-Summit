@@ -156,7 +156,7 @@ export const AgendaTimeline: React.FC<AgendaTimelineProps> = ({
             <div className="w-20 h-1.5 bg-[#00D5D8] rounded-full mt-1.5"></div>
             
             <p className="text-xs text-purple-900/80 mt-2 font-medium">
-              Digital Creator Summit PNM26 · Unión Adventista Panameña
+              Digital Creator Summit 26 · Unión Adventista Panameña
             </p>
           </div>
 

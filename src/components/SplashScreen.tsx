@@ -74,7 +74,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, onSkip }
         <div className="space-y-2">
           <div className="inline-block px-3.5 py-1 rounded-full bg-gradient-to-r from-[#E01E7E]/30 to-[#00D5D8]/30 border border-[#00D5D8]/40 backdrop-blur-md">
             <span className="text-[11px] font-black tracking-widest text-[#00D5D8] uppercase">
-              DIGITAL CREATOR SUMMIT · PNM26
+              DIGITAL CREATOR SUMMIT · 26
             </span>
           </div>
 

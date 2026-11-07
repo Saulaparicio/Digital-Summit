@@ -31,7 +31,7 @@ export default function App() {
   // Agenda State with LocalStorage Persistence
   const [agenda, setAgenda] = useState<AgendaItem[]>(() => {
     try {
-      const saved = localStorage.getItem('summit_agenda_pnm26');
+      const saved = localStorage.getItem('summit_agenda_26') || localStorage.getItem('summit_agenda_pnm26');
       return saved ? JSON.parse(saved) : OFFICIAL_SUMMIT_AGENDA;
     } catch {
       return OFFICIAL_SUMMIT_AGENDA;
@@ -151,7 +151,7 @@ export default function App() {
   const updateAgenda = useCallback((newAgenda: AgendaItem[]) => {
     setAgenda(newAgenda);
     try {
-      localStorage.setItem('summit_agenda_pnm26', JSON.stringify(newAgenda));
+      localStorage.setItem('summit_agenda_26', JSON.stringify(newAgenda));
     } catch {}
   }, []);
 
@@ -653,7 +653,7 @@ export default function App() {
       {/* Quiet Footer */}
       <footer className="mt-auto border-t border-[#3B076C]/60 bg-[#140124] py-6 text-xs text-purple-300/80 text-center">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="font-bold text-white">Digital Creator Summit PNM26 · Unión Adventista Panameña</span>
+          <span className="font-bold text-white">Digital Creator Summit 26 · Unión Adventista Panameña</span>
           <span className="font-mono text-[#00D5D8] font-bold">UnaVoz27 · En Cristo todas las cosas son nuevas</span>
           <span className="text-purple-300">Balboa, Ancón · Edif. 0844</span>
         </div>

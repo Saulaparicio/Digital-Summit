@@ -91,7 +91,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
   // Copy single session summary
   const handleCopySession = (item: AgendaItem) => {
     const sessionNote = notes[item.id] ? `\nNotas: ${notes[item.id]}` : '';
-    const text = `Digital Creator Summit PNM26 · Actividad Concluida:\n"${item.title}"\nHorario: ${formatTo12Hour(item.startTime)} - ${formatTo12Hour(item.endTime)}\nResponsable: ${item.speaker || 'General'}\nDetalles: ${item.description || ''}${sessionNote}`;
+    const text = `Digital Creator Summit 26 · Actividad Concluida:\n"${item.title}"\nHorario: ${formatTo12Hour(item.startTime)} - ${formatTo12Hour(item.endTime)}\nResponsable: ${item.speaker || 'General'}\nDetalles: ${item.description || ''}${sessionNote}`;
     navigator.clipboard.writeText(text);
     setCopiedId(item.id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -100,7 +100,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
   // Copy full history report
   const handleCopyAllHistory = () => {
     const lines = [
-      `=== REPORTE DE HISTORIAL · DIGITAL CREATOR SUMMIT PNM26 ===`,
+      `=== REPORTE DE HISTORIAL · DIGITAL CREATOR SUMMIT 26 ===`,
       `Actividades concluidas hasta las: ${formatTo12Hour(
         `${Math.floor(currentSecondsOfDay / 3600)}:${Math.floor((currentSecondsOfDay % 3600) / 60)}`
       )}`,

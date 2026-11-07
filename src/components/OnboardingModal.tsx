@@ -33,7 +33,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
     {
       badge: '01 · BIENVENIDA Y LEMA',
       badgeColor: 'bg-pink-100 text-[#E01E7E] border-pink-200',
-      title: 'Digital Creator Summit PNM26',
+      title: 'Digital Creator Summit 26',
       subtitle: '“En Cristo, todas las cosas son nuevas” · UnaVoz27',
       icon: (
         <div className="w-24 h-16 flex items-center justify-center shrink-0">

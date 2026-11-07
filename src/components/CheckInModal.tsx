@@ -132,7 +132,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
                 Acreditación & Confirmación de Asistencia
               </h3>
               <p className="text-[11px] text-purple-900/80 font-medium">
-                Digital Creator Summit PNM26 · UnaVoz27
+                Digital Creator Summit 26 · UnaVoz27
               </p>
             </div>
           </div>
@@ -237,7 +237,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
                     <span>¡Asistencia Confirmada con Éxito!</span>
                   </div>
                   <p className="text-xs font-semibold text-purple-900">
-                    Bienvenido(a) al Digital Creator Summit PNM26. Tu acreditación está activa.
+                    Bienvenido(a) al Digital Creator Summit 26. Tu acreditación está activa.
                   </p>
                 </div>
               )}
@@ -255,7 +255,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({
                     />
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider text-[#1C0235] block leading-none">
-                        DIGITAL CREATOR SUMMIT PNM26
+                        DIGITAL CREATOR SUMMIT 26
                       </span>
                       <span className="text-[9px] text-[#E01E7E] font-bold font-script text-xs">
                         UnaVoz27 · Panamá

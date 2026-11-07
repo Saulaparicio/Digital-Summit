@@ -24,7 +24,7 @@ export const OFFICIAL_SUMMIT_AGENDA: AgendaItem[] = [
     title: 'Bienvenida Oficial e Inauguración',
     speaker: 'Pr. José Smith y Pr. Luis Guerra',
     category: 'ceremony',
-    description: 'Apertura formal del Digital Creator Summit PNM26. "En Cristo, todas las cosas son nuevas."',
+    description: 'Apertura formal del Digital Creator Summit 26. "En Cristo, todas las cosas son nuevas."',
     location: 'Auditorio Central'
   },
   {
